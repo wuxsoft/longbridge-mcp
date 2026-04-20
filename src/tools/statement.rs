@@ -8,6 +8,7 @@ use time::OffsetDateTime;
 
 use crate::error::Error;
 use crate::tools::http_client::http_get_tool;
+use crate::tools::tolerant::{tolerant_option_i32, tolerant_option_vec_string};
 use crate::tools::tool_json;
 
 #[derive(Debug, Deserialize, JsonSchema)]
@@ -17,6 +18,7 @@ pub struct StatementListParam {
     /// Start date (yyyy-mm-dd), optional
     pub start_date: Option<String>,
     /// Number of records to return
+    #[serde(default, deserialize_with = "tolerant_option_i32")]
     pub limit: Option<i32>,
 }
 
@@ -25,6 +27,7 @@ pub struct StatementExportParam {
     /// File key from statement_list
     pub file_key: String,
     /// Sections to export. Valid values: "asset", "account_balances", "equity_holdings", "account_balance_changes", "stock_trades", "equity_holding_changes", "account_balance_locks", "equity_holding_locks", "option_trades", "fund_trades", "ipo_trades", "virtual_trades", "interests", "lending_fees", "custodian_fees", "corps", "bond_equity_holdings", "otc_trades", "outstandings", "financing_transactions", "interest_deposits", "maintenance_fees", "cash_pluses", "gst_details". Omit to export all sections.
+    #[serde(default, deserialize_with = "tolerant_option_vec_string")]
     pub sections: Option<Vec<String>>,
 }
 

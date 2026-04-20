@@ -38,6 +38,7 @@ mod portfolio;
 mod quote;
 mod sharelist;
 mod statement;
+mod tolerant;
 mod trade;
 
 /// Longbridge MCP tool server (stateless).
