@@ -8,23 +8,21 @@ use crate::counter::symbol_to_counter_id;
 use crate::tools::support::http_client::http_post_tool;
 use crate::tools::support::parse;
 
-/// Parameters for `quant_run_script`.
-///
-/// Mirrors `longbridge quant run` (longbridge-terminal CLI). Fields, order
-/// and per-field doc strings are kept aligned with the CLI definition so
-/// users see the same descriptions in either client.
+/// Parameters for running an indicator script against historical K-line data:
+/// target symbol, date range, K-line period, the script source itself, and
+/// optional script inputs.
 #[derive(Debug, Deserialize, JsonSchema)]
 pub struct RunScriptParam {
-    /// Symbol in <CODE>.<MARKET> format, e.g. TSLA.US 700.HK
+    /// Symbol in <CODE>.<MARKET> format, e.g. TSLA.US, 700.HK
     pub symbol: String,
-    /// K-line period: 1m 5m 15m 30m 1h day week month year (default: day)
+    /// K-line period: 1m, 5m, 15m, 30m, 1h, day, week, month, year (default: day)
     #[serde(default = "default_period")]
     pub period: String,
     /// Start date (YYYY-MM-DD) for the K-line range
     pub start: String,
     /// End date (YYYY-MM-DD) for the K-line range
     pub end: String,
-    /// Script text. Inline indicator script source (PineScript V6 compatible).
+    /// Indicator script source (PineScript V6 syntax).
     pub script: Option<String>,
     /// Script input values as a JSON array, e.g. "[14,2.0]". Must match the order of input.*() calls in the script.
     pub input: Option<String>,

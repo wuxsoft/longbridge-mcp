@@ -1417,7 +1417,7 @@ impl Longbridge {
 
     /// Run a quant indicator script against historical K-line data on the server.
     #[tool(
-        description = "Run a quant indicator script against historical K-line data on the server. Executes the script server-side and returns the computed indicator/plot values as JSON. The script language is compatible with PineScript V6 syntax (minor exceptions may apply). Periods: 1m, 5m, 15m, 30m, 1h, day, week, month, year (default: day). The optional input flag accepts a JSON array matching the order of input.*() calls in the script, e.g. \"[14,2.0]\"."
+        description = "Run a quant indicator script against historical K-line data on the server. Executes the script server-side and returns the computed indicator/plot values as JSON. The script language is compatible with PineScript V6 syntax (minor exceptions may apply). Periods: 1m, 5m, 15m, 30m, 1h, day, week, month, year (default: day). The optional input parameter accepts a JSON array matching the order of input.*() calls in the script, e.g. \"[14,2.0]\"."
     )]
     async fn quant_run(
         &self,
